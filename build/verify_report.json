@@ -1,0 +1,79 @@
+{
+ "cx_paras": 14,
+ "cx_ok": 14,
+ "cci_blocks": 74,
+ "cci_paras": 116,
+ "cci_live_ok": 116,
+ "cci_local_ok": 116,
+ "creed_ok": 5,
+ "ws_paras": 13,
+ "ws_ok": 13,
+ "fail": [],
+ "prose_quotes": 430,
+ "prose_unmatched": [
+  [
+   "bible.html",
+   "必用铁杖辖管他们"
+  ],
+  [
+   "churches.html",
+   "我服事他八十六年……"
+  ],
+  [
+   "churches.html",
+   "他们必仰望我，就是他们所扎的"
+  ],
+  [
+   "churches.html",
+   "他爱我们，用自己的血使我们脱离罪恶，又使我们成为国民，作他父神的祭司。"
+  ],
+  [
+   "conflict.html",
+   "全能者啊，你的作为大哉！奇哉！万世之王啊，你的道途义哉！诚哉！"
+  ],
+  [
+   "history.html",
+   "接近多米田统治末期"
+  ],
+  [
+   "history.html",
+   "罗马与奥古斯都"
+  ],
+  [
+   "history.html",
+   "我服事他八十六年……"
+  ],
+  [
+   "index.html",
+   "听见狮子，看见羔羊"
+  ],
+  [
+   "memory.html",
+   "以士别推，撒非老"
+  ],
+  [
+   "memory.html",
+   "一士别推，撒（手）非老"
+  ],
+  [
+   "memory.html",
+   "结构 + 旧约背景 + 记忆钩"
+  ],
+  [
+   "seals.html",
+   "打仗……饥荒、地震。这都是灾难的起头"
+  ],
+  [
+   "structure.html",
+   "我们这个时代之后才开始"
+  ],
+  [
+   "victory.html",
+   "现今实现的千禧年"
+  ],
+  [
+   "victory.html",
+   "我造了一切新的"
+  ]
+ ]
+}
