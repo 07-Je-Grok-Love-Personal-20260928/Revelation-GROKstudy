@@ -2,7 +2,7 @@
 import json, re, html as H
 from bible import verses
 CCI = "/workspace/cci"
-VER = "v2.0.0"; DATE = "2026-11-14"; ASSET_V = "20261114a"
+VER = "v3.0.0"; DATE = "2026-11-14"; ASSET_V = "20261114b"
 def strip(t): return re.sub(r'\^\d+', '', t)
 _c = json.load(open(f"{CCI}/creeds.json")); _h = json.load(open(f"{CCI}/heidelberg.json"))
 _b = json.load(open(f"{CCI}/belgic.json")); _d = json.load(open(f"{CCI}/dort.json"))
@@ -81,7 +81,7 @@ def verse_card(ref, cls=""):
 
 NAV = [("index.html","🏠","首页"),("bible.html","📜","整本圣经·圣约"),("history.html","🗺️","背景·时间·地图"),("structure.html","🧩","结构·解经"),
        ("churches.html","🕯️","七教会 1–3"),("seals.html","📯","印与号 4–11"),("conflict.html","🐉","大争战 12–16"),("victory.html","👑","得胜·新天地 17–22"),
-       ("doctrine.html","🧭","教义·信条"),("creeds.html","✝️","三大信经"),("forms.html","📘","三项联合信条"),("memory.html","🧠","记忆·自测"),("sources.html","🔖","来源·校验")]
+       ("doctrine.html","🧭","教义·信条"),("creeds.html","✝️","三大信经"),("forms.html","📘","三项联合信条"),("videos.html","🎬","视频讲解"),("memory.html","🧠","记忆·自测"),("sources.html","🔖","来源·校验")]
 
 def toc_from(body):
     items = re.findall(r'<h([23]) id="([^"]+)"[^>]*>(.*?)</h\1>', body)

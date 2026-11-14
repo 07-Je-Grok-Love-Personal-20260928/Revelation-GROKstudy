@@ -9,17 +9,9 @@
   "clicks": []
  },
  "360/churches.html": {
-  "sw": 372,
+  "sw": 360,
   "vw": 360,
-  "off": [
-   "church glass reveal in 14→372",
-   "church glass reveal in 14→372",
-   "church glass reveal in 14→372",
-   "church glass reveal in 14→372",
-   "church glass reveal in 14→372",
-   "church glass reveal in 14→372",
-   "church glass reveal in 14→372"
-  ],
+  "off": [],
   "clip": [],
   "hdr": [],
   "errs": [],
@@ -36,6 +28,7 @@
    "flip",
    "flip",
    "flip",
+   "vid",
    "src:12"
   ]
  },
@@ -62,6 +55,7 @@
    "flip",
    "flip",
    "flip",
+   "vid",
    "src:12",
    "src:12"
   ]
@@ -115,6 +109,7 @@
   "errs": [],
   "clicks": [
    "btns:4",
+   "vid",
    "src:12",
    "src:12",
    "src:12",
@@ -205,7 +200,8 @@
    "flip",
    "flip",
    "flip",
-   "flip"
+   "flip",
+   "vid"
   ]
  },
  "360/sources.html": {
@@ -224,7 +220,12 @@
   "clip": [],
   "hdr": [],
   "errs": [],
-  "clicks": []
+  "clicks": [
+   "vid",
+   "vid",
+   "ex",
+   "ex"
+  ]
  },
  "360/victory.html": {
   "sw": 360,
@@ -252,8 +253,28 @@
    "flip",
    "flip",
    "flip",
+   "vid",
+   "vid",
+   "ex",
+   "ex",
    "src:12",
    "src:12"
+  ]
+ },
+ "360/videos.html": {
+  "sw": 360,
+  "vw": 360,
+  "off": [],
+  "clip": [],
+  "hdr": [],
+  "errs": [],
+  "clicks": [
+   "vid",
+   "vid",
+   "ex",
+   "ex",
+   "ex",
+   "ex"
   ]
  },
  "390/bible.html": {
@@ -285,6 +306,7 @@
    "flip",
    "flip",
    "flip",
+   "vid",
    "src:12"
   ]
  },
@@ -311,6 +333,7 @@
    "flip",
    "flip",
    "flip",
+   "vid",
    "src:12",
    "src:12"
   ]
@@ -364,6 +387,7 @@
   "errs": [],
   "clicks": [
    "btns:4",
+   "vid",
    "src:12",
    "src:12",
    "src:12",
@@ -454,7 +478,8 @@
    "flip",
    "flip",
    "flip",
-   "flip"
+   "flip",
+   "vid"
   ]
  },
  "390/sources.html": {
@@ -473,7 +498,12 @@
   "clip": [],
   "hdr": [],
   "errs": [],
-  "clicks": []
+  "clicks": [
+   "vid",
+   "vid",
+   "ex",
+   "ex"
+  ]
  },
  "390/victory.html": {
   "sw": 390,
@@ -501,8 +531,28 @@
    "flip",
    "flip",
    "flip",
+   "vid",
+   "vid",
+   "ex",
+   "ex",
    "src:12",
    "src:12"
+  ]
+ },
+ "390/videos.html": {
+  "sw": 390,
+  "vw": 390,
+  "off": [],
+  "clip": [],
+  "hdr": [],
+  "errs": [],
+  "clicks": [
+   "vid",
+   "vid",
+   "ex",
+   "ex",
+   "ex",
+   "ex"
   ]
  },
  "768/bible.html": {
@@ -534,6 +584,7 @@
    "flip",
    "flip",
    "flip",
+   "vid",
    "src:12"
   ]
  },
@@ -560,6 +611,7 @@
    "flip",
    "flip",
    "flip",
+   "vid",
    "src:12",
    "src:12"
   ]
@@ -613,6 +665,7 @@
   "errs": [],
   "clicks": [
    "btns:4",
+   "vid",
    "src:12",
    "src:12",
    "src:12",
@@ -703,7 +756,8 @@
    "flip",
    "flip",
    "flip",
-   "flip"
+   "flip",
+   "vid"
   ]
  },
  "768/sources.html": {
@@ -722,7 +776,12 @@
   "clip": [],
   "hdr": [],
   "errs": [],
-  "clicks": []
+  "clicks": [
+   "vid",
+   "vid",
+   "ex",
+   "ex"
+  ]
  },
  "768/victory.html": {
   "sw": 768,
@@ -750,8 +809,28 @@
    "flip",
    "flip",
    "flip",
+   "vid",
+   "vid",
+   "ex",
+   "ex",
    "src:12",
    "src:12"
+  ]
+ },
+ "768/videos.html": {
+  "sw": 768,
+  "vw": 768,
+  "off": [],
+  "clip": [],
+  "hdr": [],
+  "errs": [],
+  "clicks": [
+   "vid",
+   "vid",
+   "ex",
+   "ex",
+   "ex",
+   "ex"
   ]
  },
  "1024/bible.html": {
@@ -783,6 +862,7 @@
    "flip",
    "flip",
    "flip",
+   "vid",
    "src:12"
   ]
  },
@@ -809,6 +889,7 @@
    "flip",
    "flip",
    "flip",
+   "vid",
    "src:12",
    "src:12"
   ]
@@ -862,6 +943,7 @@
   "errs": [],
   "clicks": [
    "btns:4",
+   "vid",
    "src:12",
    "src:12",
    "src:12",
@@ -952,7 +1034,8 @@
    "flip",
    "flip",
    "flip",
-   "flip"
+   "flip",
+   "vid"
   ]
  },
  "1024/sources.html": {
@@ -971,7 +1054,12 @@
   "clip": [],
   "hdr": [],
   "errs": [],
-  "clicks": []
+  "clicks": [
+   "vid",
+   "vid",
+   "ex",
+   "ex"
+  ]
  },
  "1024/victory.html": {
   "sw": 1024,
@@ -999,8 +1087,28 @@
    "flip",
    "flip",
    "flip",
+   "vid",
+   "vid",
+   "ex",
+   "ex",
    "src:12",
    "src:12"
+  ]
+ },
+ "1024/videos.html": {
+  "sw": 1024,
+  "vw": 1024,
+  "off": [],
+  "clip": [],
+  "hdr": [],
+  "errs": [],
+  "clicks": [
+   "vid",
+   "vid",
+   "ex",
+   "ex",
+   "ex",
+   "ex"
   ]
  },
  "1440/bible.html": {
@@ -1032,6 +1140,7 @@
    "flip",
    "flip",
    "flip",
+   "vid",
    "src:12"
   ]
  },
@@ -1058,6 +1167,7 @@
    "flip",
    "flip",
    "flip",
+   "vid",
    "src:12",
    "src:12"
   ]
@@ -1111,6 +1221,7 @@
   "errs": [],
   "clicks": [
    "btns:4",
+   "vid",
    "src:12",
    "src:12",
    "src:12",
@@ -1201,7 +1312,8 @@
    "flip",
    "flip",
    "flip",
-   "flip"
+   "flip",
+   "vid"
   ]
  },
  "1440/sources.html": {
@@ -1220,7 +1332,12 @@
   "clip": [],
   "hdr": [],
   "errs": [],
-  "clicks": []
+  "clicks": [
+   "vid",
+   "vid",
+   "ex",
+   "ex"
+  ]
  },
  "1440/victory.html": {
   "sw": 1440,
@@ -1248,8 +1365,28 @@
    "flip",
    "flip",
    "flip",
+   "vid",
+   "vid",
+   "ex",
+   "ex",
    "src:12",
    "src:12"
+  ]
+ },
+ "1440/videos.html": {
+  "sw": 1440,
+  "vw": 1440,
+  "off": [],
+  "clip": [],
+  "hdr": [],
+  "errs": [],
+  "clicks": [
+   "vid",
+   "vid",
+   "ex",
+   "ex",
+   "ex",
+   "ex"
   ]
  }
 }

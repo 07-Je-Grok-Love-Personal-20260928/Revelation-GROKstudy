@@ -30,6 +30,12 @@ CLICK_JS=r"""async () => {
     for(const b of btns){ for(let i=0;i<2;i++){ b.click(); await new Promise(r=>setTimeout(r,40)); } }
     log.push('btns:'+btns.length);
   }
+  // video facades + explainers (only first two facades to avoid many network iframes)
+  const fac=[...document.querySelectorAll('.vid-play')].slice(0,2);
+  for(const b of fac){ b.click(); await new Promise(r=>setTimeout(r,80)); log.push('vid'); }
+  for(const b of document.querySelectorAll('.ex-play, .ex-reset')){
+    b.click(); await new Promise(r=>setTimeout(r,80)); log.push('ex');
+  }
   for(const sel of document.querySelectorAll('.lm-src')){
     const opts=[...sel.options].map(o=>o.value);
     for(const v of opts.slice(0,4)){ sel.value=v; sel.dispatchEvent(new Event('change',{bubbles:true})); await new Promise(r=>setTimeout(r,80)); }

@@ -1,4 +1,4 @@
-/* 启示录深读 GROKstudy v1.0.0 */
+/* 启示录深读 GROKstudy v3.0.0 */
 (function(){
 "use strict";
 var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
@@ -137,4 +137,52 @@ if(dEl){
 }
 /* draw svg in twoage */
 $$('.twoage').forEach(function(f){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){$$('.draw',f).forEach(function(d){d.classList.add('in')});o.disconnect()}})});o.observe(f)});
+/* click-to-load privacy embeds + offline explainers */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.vid-play');
+  if(b){
+    e.preventDefault();
+    var fig=b.closest('.vid'); if(!fig||fig.classList.contains('on'))return;
+    var id=fig.dataset.yt; if(!id)return;
+    var ifr=document.createElement('iframe');
+    ifr.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'?autoplay=1&rel=0&modestbranding=1';
+    ifr.setAttribute('allow','accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;fullscreen');
+    ifr.allowFullscreen=true; ifr.title=(b.getAttribute('aria-label')||'视频').replace(/^播放：/,'');
+    ifr.setAttribute('loading','lazy');
+    fig.classList.add('on'); b.replaceWith(ifr);
+    return;
+  }
+  var exb=e.target.closest('.ex-play, .ex-reset'); if(!exb)return;
+  var box=exb.closest('.explainer'); if(!box)return;
+  playExplainer(box, exb.classList.contains('ex-reset')||exb.classList.contains('ex-play'));
+});
+function playExplainer(box, restart){
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cap=box.querySelector('.ex-cap');
+  if(box.dataset.ex==='parallel'){
+    var caps=(box.dataset.caps||'').split('|');
+    var lis=[].slice.call(box.querySelectorAll('.ex-bars li'));
+    lis.forEach(function(li){li.classList.remove('on')});
+    box.classList.remove('done','playing');
+    if(reduce){lis.forEach(function(li){li.classList.add('on')});box.classList.add('done');if(cap)cap.textContent=caps[caps.length-1]||'';return}
+    box.classList.add('playing'); var i=0;
+    if(box._timer)clearTimeout(box._timer);
+    (function step(){
+      if(i<lis.length){lis[i].classList.add('on'); if(cap)cap.textContent=caps[i]||''; i++; box._timer=setTimeout(step, 900);}
+      else{box.classList.add('done');}
+    })();
+    return;
+  }
+  if(box.dataset.ex==='cities'){
+    var lines=['属世之城先以荣华出现——七山、客商、权势。','巴比伦必倾倒：凡自我神化的文明都不能存到永远。','新耶路撒冷从天而降：不是地上圣殿重修，而是神的帐幕在人间。','终点是圣约公式的完成：神要与人同住。'];
+    box.classList.remove('playing','done'); void box.offsetWidth;
+    if(reduce){box.classList.add('done'); if(cap)cap.textContent=lines[lines.length-1];return}
+    box.classList.add('playing'); var j=0;
+    if(box._timer)clearTimeout(box._timer);
+    (function step(){
+      if(cap)cap.textContent=lines[Math.min(j,lines.length-1)];
+      if(j<lines.length-1){j++; box._timer=setTimeout(step, 1400);} else box.classList.add('done');
+    })();
+  }
+}
 })();
