@@ -13,9 +13,11 @@ var TILES={
   "esri-imagery":{name:"Esri 卫星影像",url:"https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",attr:"Imagery © Esri, Maxar, Earthstar",max:18},
   opentopo:{name:"OpenTopoMap",url:"https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",sub:["a","b","c"],attr:"© OSM, SRTM | OpenTopoMap (CC-BY-SA)",max:17},
   wikimedia:{name:"Wikimedia 地图",url:"https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png",attr:"© OSM © Wikimedia",max:19},
+  "esri-natgeo":{name:"Esri 国家地理",url:"https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}",attr:"Tiles © Esri",max:16},
+  cyclosm:{name:"CyclOSM",url:"https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png",sub:["a","b","c"],attr:"© OSM © CyclOSM",max:19},
   gaode:{name:"高德（中国可达）",url:"https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",sub:["1","2","3","4"],attr:"© 高德地图",max:18}
 };
-var AUTO=["osm","esri-street","esri-topo","osm-hot","opentopo","esri-imagery","wikimedia","carto-voyager","carto-light","carto-dark","gaode"];
+var AUTO=["osm","esri-street","esri-topo","osm-hot","opentopo","esri-imagery","wikimedia","esri-natgeo","cyclosm","carto-voyager","carto-light","carto-dark","gaode"];
 var BAD_KEY="rv-tiles-bad-v2", GOOD_KEY="rv-tiles-good-v2";
 function badSet(){try{return new Set(JSON.parse(sessionStorage.getItem(BAD_KEY)||"[]"))}catch(e){return new Set()}}
 function markBad(id){var s=badSet();s.add(id);try{sessionStorage.setItem(BAD_KEY,JSON.stringify(Array.from(s)));sessionStorage.removeItem(GOOD_KEY)}catch(e){}}

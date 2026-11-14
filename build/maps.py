@@ -45,6 +45,9 @@ def mk(k, info, c="#f5b942"):
     lat, lng, n = P[k]
     return dict(k=k, n=n, lat=lat, lng=lng, c=c, i=info)
 
+def mkx(k, n, lat, lng, info, c="#f5b942"):
+    return dict(k=k, n=n, lat=lat, lng=lng, c=c, i=info)
+
 def pair(mid, title, hid, sub, svg, center, zoom, markers, lines=None, hint="点按标记或示意图说明，再对照下方实时地图。"):
     lat, lng = center
     return (
@@ -66,6 +69,8 @@ def pair(mid, title, hid, sub, svg, center, zoom, markers, lines=None, hint="点
         f'<option value="opentopo">OpenTopoMap</option>'
         f'<option value="wikimedia">Wikimedia 地图</option>'
         f'<option value="gaode">高德（中国可达）</option>'
+        f'<option value="esri-natgeo">Esri 国家地理</option>'
+        f'<option value="cyclosm">CyclOSM</option>'
         f'</select></label><span class="lm-st" data-s="idle">示意图已就绪 · 进入视窗后加载实时底图</span></div>'
         f'<div class="lm-view" role="application" aria-label="{esc(title, quote=True)}实时地图"'
         f' data-lat="{lat}" data-lng="{lng}" data-z="{zoom}"'
@@ -222,6 +227,48 @@ def svg_ot():
     s.append('<text x="320" y="265" text-anchor="middle" font-size="12" fill="#c9d7ea">读懂启示录的钥匙不是报纸，而是这些地点所承载的旧约故事。</text></svg>')
     return "".join(s)
 
+
+def svg_sevenhills():
+    s=['<svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="罗马七丘示意图" overflow="hidden">',
+       '<defs><linearGradient id="tiber" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3fa9ff"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient></defs>',
+       '<rect width="640" height="280" fill="#10182d"/>',
+       '<path d="M70 20 C 90 80, 70 140, 110 170 S 90 230, 130 270" fill="none" stroke="url(#tiber)" stroke-width="16" stroke-linecap="round" opacity=".85"/>',
+       '<text x="48" y="150" fill="#7dd3fc" font-size="11" transform="rotate(-70 48 150)">台伯河</text>']
+    hills=[("卡比托利欧",160,70,"元老院与朱庇特神庙"),("奎里纳尔",280,50,"皇宫所在的山脊"),("维米纳尔",380,70,""),("埃斯奎林",500,90,"最大的山丘"),
+           ("帕拉蒂尼",240,150,"罗慕路斯与奥古斯都"),("凯里乌斯",420,160,""),("阿文提诺",300,220,"平民之丘")]
+    for i,(n,x,y,d) in enumerate(hills):
+        s.append(f'<g transform="translate({x},{y})">')
+        s.append(f'<ellipse rx="54" ry="28" fill="#3d2a16"/><ellipse cy="-8" rx="40" ry="18" fill="#6b4a24"/>')
+        s.append(f'<text y="4" text-anchor="middle" font-size="12" fill="#ffe7b3" font-weight="700">{n}</text>')
+        if d: s.append(f'<text y="32" text-anchor="middle" font-size="10" fill="#c9d7ea">{d}</text>')
+        s.append('</g>')
+    s.append('<text x="320" y="268" text-anchor="middle" font-size="12" fill="#ffc857" font-weight="700">启 17:9「七山」——七丘之城罗马，也是历代属世之城的代号。</text></svg>')
+    return "".join(s)
+
+def svg_guild():
+    # 行业公会与帝王崇拜压力流程图
+    boxes=[
+        (40,40,160,64,"祭皇帝为神？","#ff6b8b"),
+        (280,20,160,56,"妥协：赴庙宴、买证书","#9aa3b2"),
+        (280,110,160,56,"拒绝：基督是主","#4ade80"),
+        (500,20,130,56,"公会与市场准入","#fbbf24"),
+        (500,110,130,56,"除名、不能买卖","#fb7185"),
+        (280,200,160,56,"至死忠心 → 生命冠冕","#ffc857"),
+    ]
+    s=['<svg viewBox="0 0 660 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="行业公会压力流程图" overflow="hidden">',
+       '<rect width="660" height="280" fill="#10182d"/>']
+    def arr(x1,y1,x2,y2,c="#c9d7ea"):
+        return f'<path d="M{x1} {y1} L{x2} {y2}" stroke="{c}" stroke-width="2" marker-end="url(#ar)"/>'
+    s.append('<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c9d7ea"/></marker></defs>')
+    s.append(arr(200,72,280,48)); s.append(arr(200,72,280,138))
+    s.append(arr(440,48,500,48)); s.append(arr(440,138,500,138))
+    s.append(arr(360,166,360,200))
+    for x,y,w,h,lab,c in boxes:
+        s.append(f'<g transform="translate({x},{y})"><rect width="{w}" height="{h}" rx="12" fill="#1a2340" stroke="{c}" stroke-width="2"/>')
+        s.append(f'<text x="{w/2}" y="{h/2+5}" text-anchor="middle" font-size="13" fill="#eef1fa" font-weight="700">{lab}</text></g>')
+    s.append('<text x="330" y="272" text-anchor="middle" font-size="12" fill="#c9d7ea">启 13:17「若没有这个印记……都不能做买卖」——压力先落在公会与市场，不是抽象教义。</text></svg>')
+    return "".join(s)
+
 # ───────── 页面组装
 def history_maps():
     ch_info = {c["k"]: f'{c["n"]}（今{c["today"]}）。{c["bg"][:80]}… 书信回响：{c["promise"][:40]}' for c in CH}
@@ -298,7 +345,7 @@ def history_maps():
     ]
     b=[]
     b.append('<h2 id="h3">四、地图与历史地理</h2>')
-    b.append('<div class="callout key-c"><b>💎 怎么用这些地图</b><p>每一幅都先给<strong>离线示意图</strong>（画在页面里，断网也能看），再配<strong>实时地图</strong>。实时底图默认「自动」：按你的网络从 CARTO、OSM、Esri、OpenTopo、Wikimedia、高德等源中选用，某一源失败就立刻换下一个；若全部失败，示意图仍在。可随时手动切换底图（含卫星影像）。</p></div>')
+    b.append('<div class="callout key-c"><b>💎 怎么用这些地图</b><p>每一幅都先给<strong>离线示意图</strong>（画在页面里，断网也能看），再配<strong>实时地图</strong>。实时底图默认「自动」：按你的网络从 OSM、Esri、OpenTopo、Wikimedia、CARTO、高德、CyclOSM 等源中选用，某一源失败就立刻换下一个；若全部失败，示意图仍在。可随时手动切换底图（含卫星影像）。</p></div>')
     b.append(pair("patmos", "🏝️ 拔摩岛：流放与启示的地点", "h3a",
         "以弗所西南约 90 公里的爱琴海小岛（约 34 平方公里）。罗马对较有身份者的流放（relegatio）常选此类岛屿。岛上传统「启示洞」与圣约翰修道院是后来朝圣建筑，但「约翰在拔摩」是经文本身的记录。",
         svg_patmos(), (37.325, 26.548), 11,
@@ -340,6 +387,23 @@ def history_maps():
         "启示录几乎不直接引用旧约，却处处暗引。把这些地点放回地图：出埃及的灾祸、西奈的会幕、锡安的圣殿、推罗的贸易、尼尼微与巴比伦的倾倒——全部在羔羊的异象里重述并完成。",
         svg_ot(), (33.0, 38.0), 4, ot,
         hint="这是「读经地图」，不是旅游清单：每个点连着一条旧约故事线。"))
+    hills=[
+        mkx("palatine","帕拉蒂尼丘",41.8894,12.4878,"罗慕路斯传说与奥古斯都宫殿所在。七丘的核心。","#ffc857"),
+        mkx("capitoline","卡比托利欧丘",41.8934,12.4828,"朱庇特神庙与元老院所在，帝国宗教与政治的山顶。","#ff6b8b"),
+        mkx("aventine","阿文提诺丘",41.8836,12.4797,"传统上的平民之丘。","#2dd4bf"),
+        mkx("caelian","凯里乌斯丘",41.8870,12.4952,"东南部山丘。","#7dd3fc"),
+        mkx("esquiline","埃斯奎林丘",41.8955,12.4970,"面积最大的一丘。","#c4b5fd"),
+        mkx("viminal","维米纳尔丘",41.8994,12.4939,"七丘之一。","#fbbf24"),
+        mkx("quirinal","奎里纳尔丘",41.9015,12.4870,"日后皇宫所在的山脊。","#fb7185"),
+        mk("rome","帝国广场与斗兽场一带：七丘环抱的城心。","#ff6b8b"),
+    ]
+    b.append(pair("sevenhills", "🏛️ 罗马七丘：启 17:9 怎样落地", "h3j",
+        "「那七头就是女人所坐的七座山」（启17:9）。古典作家（维吉尔、西塞罗）早已用「七丘之城」称呼罗马。改革宗读法：这是约翰时代的地理暗号，也指向每一世代自我神化的权势，而不是一份现代城市重建计划。",
+        svg_sevenhills(), (41.890, 12.490), 14, hills,
+        hint="切换卫星底图，七丘的起伏在台伯河东岸仍清晰可辨。"))
+    b.append('<h3 id="h3k">⚙️ 行业公会与「不能做买卖」</h3>'
+             '<p class="note">推雅推喇以染料与铜匠公会闻名；以弗所的银匠曾因亚底米神龛生意鼓噪（徒19）。拒绝帝王崇拜或偶像宴席，往往先失去公会资格，再失去市场。这是启 13:17 最贴近第一世纪的文化读法。</p>'
+             + f'<figure class="schematic" aria-label="行业公会压力流程图">{svg_guild()}<figcaption>📐 离线情景图：压力从神庙到公会，再到市场。</figcaption></figure>')
     return "".join(b)
 
 def conflict_maps():
@@ -363,7 +427,13 @@ def victory_maps():
             + pair("zion2", "🌅 新耶路撒冷所对的历史锡安", "v2",
                    "新耶路撒冷「从天而降」，不是地上圣殿的重修，而是神与人同住的完成。历史的锡安是预表。",
                    svg_zion(), (31.778, 35.235), 12,
-                   [mk("jerusalem","历史的圣城。","#b794ff"), mk("zion","锡安山。","#f5b942")]))
+                   [mk("jerusalem","历史的圣城。","#b794ff"), mk("zion","锡安山。","#f5b942")])
+            + pair("hills2", "🏛️ 罗马七丘近景", "v3",
+                   "大淫妇所坐的「七山」在地理上就是这座城。先看离线七丘图，再用卫星底图走进台伯河东岸。",
+                   svg_sevenhills(), (41.890, 12.490), 14,
+                   [mkx("palatine","帕拉蒂尼丘",41.8894,12.4878,"奥古斯都宫殿与罗慕路斯传统。","#ffc857"),
+                    mkx("capitoline","卡比托利欧丘",41.8934,12.4828,"朱庇特神庙与元老院。","#ff6b8b"),
+                    mk("rome","城心：广场与斗兽场一带。","#fb7185")]))
 
 def churches_live():
     ms=[mk(c["k"], f'{c["n"]}（{c["en"]}，今{c["today"]}）。{c["title"]}。称赞：{c["praise"]}；责备：{c["rebuke"]}。', c["col"]) for c in CH]

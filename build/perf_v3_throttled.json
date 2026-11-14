@@ -1,0 +1,40 @@
+{
+  "desktop": {
+    "label": "desktop",
+    "wall": 3.897,
+    "dcl": 595.6,
+    "load": 597.3,
+    "fp": 660,
+    "fcp": 660,
+    "nodes": 1158,
+    "blur": 1,
+    "ms": 2515.3,
+    "frames": 151,
+    "fps": 60,
+    "longGaps20ms": 0,
+    "longTasks": 3,
+    "longTaskMs": 795,
+    "tbt": 645,
+    "inp_click_ms": 335.4,
+    "scrollH": 22258
+  },
+  "mobile": {
+    "label": "mobile",
+    "wall": 3.36,
+    "dcl": 466.5,
+    "load": 471.8,
+    "fp": 452,
+    "fcp": 452,
+    "nodes": 1158,
+    "blur": 1,
+    "ms": 2517,
+    "frames": 152,
+    "fps": 60.4,
+    "longGaps20ms": 0,
+    "longTasks": 0,
+    "longTaskMs": 0,
+    "tbt": 0,
+    "inp_click_ms": 34.3,
+    "scrollH": 20895
+  }
+}

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os, sys, json
 sys.path.insert(0, os.path.dirname(__file__))
-from common import page, QUOTES, VER, DATE, md
+from common import page, write_all, QUOTES, VER, DATE, md
 import geo, maps, videos, pg1, pg2, pg3, pg4, p_creed
 from chap import sec_page, SECS
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); D = os.path.join(ROOT, "docs")
@@ -10,6 +10,8 @@ if not os.path.exists(os.path.join(G, "asia.svg")) or "--maps" in sys.argv:
     geo.base_svg(os.path.join(G, "asia.svg"), geo.ASIA, "ne_10m_land", {"Gediz","Küçük Menderes","Büyük Menderes","Byk Menderes","Simav"}, 1)
     geo.base_svg(os.path.join(G, "empire.svg"), geo.EMP, "ne_50m_land", {"Nile","Rosetta Branch","Damietta Branch","Jordan","Euphrates","Firat","Al Furat","Tigris","Dicle","Tevere","Gediz","Büyük Menderes"}, 4)
 def W(fn, html):
+    if html == "\0PENDING\0":
+        return
     open(os.path.join(D, fn), "w", encoding="utf-8").write(html); print("wrote", fn, len(html)//1024, "KB")
 W("index.html", page("index.html", "启示录深读", "22 章 · 整本圣经与圣约 · 真实历史与地图 · 渐进平行与无千禧年 · 三项联合信条与三大信经逐字对照 · 记忆自测", pg1.index(), "home"))
 W("bible.html", page("bible.html", "整本圣经与圣约", "先看全景：启示录是整本圣经的终幕——旧约暗引、首尾呼应、恩典之约的完成（启21:3）", pg1.bible()))
@@ -29,5 +31,6 @@ json.dump([[k, str(a), b] for k, a, b in QUOTES], open(os.path.join(ROOT, "build
 sf = os.path.join(ROOT, "build", "verify_stats.json")
 stats = json.load(open(sf)) if os.path.exists(sf) else [["状态", "尚未运行 verify.py"]]
 W("sources.html", page("sources.html", "来源 · 校验", "引用来源、逐字校验结果、局限说明与版本记录", pg4.sources(stats)))
+write_all(D)
 open(os.path.join(D, ".nojekyll"), "w").write("")
 print("quotes:", len(QUOTES))
