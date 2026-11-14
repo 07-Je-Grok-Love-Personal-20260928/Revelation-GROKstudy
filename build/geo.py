@@ -78,7 +78,7 @@ def smooth(pts):
         d+=f" C{c1[0]:.1f},{c1[1]:.1f} {c2[0]:.1f},{c2[1]:.1f} {p2[0]:.1f},{p2[1]:.1f}"
     return d
 def asia_map(info):
-    P=ASIA; s=[f'<svg class="gmap" viewBox="0 0 {P.W} {P.H}" role="img" aria-label="亚细亚七教会与拔摩岛地图"><image href="assets/geo/asia.svg" width="{P.W}" height="{P.H}"/>']
+    P=ASIA; s=[f'<svg class="gmap" overflow="hidden" viewBox="0 0 {P.W} {P.H}" role="img" aria-label="亚细亚七教会与拔摩岛地图"><image href="assets/geo/asia.svg" width="{P.W}" height="{P.H}"/>']
     s.append('<g class="regions">'+"".join(f'<text x="{P(lo,la)[0]:.0f}" y="{P(lo,la)[1]:.0f}" text-anchor="middle">{n}</text>' for n,lo,la in RIV_A)+'</g>')
     pts=[P(AC[k][1],AC[k][2]) for k in ROUTE]
     s.append(f'<g class="lyr j1" data-l="route"><path d="{smooth(pts[:2])}" stroke="#ff9f6b" class="route"/></g>')
@@ -88,7 +88,7 @@ def asia_map(info):
     s.append(f'<g class="cnums" pointer-events="none">{nums}</g></svg>')
     return "".join(s)
 def empire_map(info):
-    P=EMP; s=[f'<svg class="gmap" viewBox="0 0 {P.W} {P.H}" role="img" aria-label="罗马帝国东部与启示录地名"><image href="assets/geo/empire.svg" width="{P.W}" height="{P.H}"/>']
+    P=EMP; s=[f'<svg class="gmap" overflow="hidden" viewBox="0 0 {P.W} {P.H}" role="img" aria-label="罗马帝国东部与启示录地名"><image href="assets/geo/empire.svg" width="{P.W}" height="{P.H}"/>']
     s.append('<g class="regions">'+"".join(f'<text x="{P(lo,la)[0]:.0f}" y="{P(lo,la)[1]:.0f}" text-anchor="middle">{n}</text>' for n,lo,la in REG_E)+'</g>')
     a=P(*EC["rome"][1:3]); b=P(*EC["patmos"][1:3]); c=P(*EC["jerusalem"][1:3]); e=P(*EC["babylon"][1:3])
     s.append(f'<g class="lyr j1" data-l="rome"><path d="M{a[0]:.0f},{a[1]:.0f} Q{(a[0]+b[0])/2:.0f},{min(a[1],b[1])-120:.0f} {b[0]:.0f},{b[1]:.0f}" stroke="#ff6b8b" class="route"/></g>')
@@ -98,7 +98,7 @@ def empire_map(info):
 def mini(k, assets="assets"):
     """单个教会的小地图（裁剪亚细亚底图）。"""
     P=ASIA; x,y=P(AC[k][1],AC[k][2]); w,h=520,325; x0=max(0,min(P.W-w,x-w/2)); y0=max(0,min(P.H-h,y-h/2))
-    s=f'<svg class="mmap" viewBox="{x0:.0f} {y0:.0f} {w} {h}" role="img" aria-label="{AC[k][0]}位置"><image href="{assets}/geo/asia.svg" width="{P.W}" height="{P.H}"/>'
+    s=f'<svg class="mmap" overflow="hidden" viewBox="{x0:.0f} {y0:.0f} {w} {h}" role="img" aria-label="{AC[k][0]}位置"><image href="{assets}/geo/asia.svg" width="{P.W}" height="{P.H}"/>'
     for kk in ROUTE:
         n,lon,lat,dx,dy,an=AC[kk]; xx,yy=P(lon,lat)
         if not (x0-20<xx<x0+w+20 and y0-20<yy<y0+h+20): continue

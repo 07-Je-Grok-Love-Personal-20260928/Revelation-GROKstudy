@@ -1,0 +1,36 @@
+{
+  "desktop": {
+    "wall_s": 2.353,
+    "domContentLoaded": 118.3,
+    "load": 119.7,
+    "fp": 160,
+    "fcp": 160,
+    "transfer": 87401,
+    "duration": 119.7,
+    "blur": 1,
+    "cls": 0,
+    "nodes": 1136,
+    "ms": 1814.6,
+    "frames": 110,
+    "fps": 60.6,
+    "longGaps": 0,
+    "scrollH": 20016
+  },
+  "mobile": {
+    "wall_s": 2.353,
+    "domContentLoaded": 99.3,
+    "load": 104.4,
+    "fp": 136,
+    "fcp": 136,
+    "transfer": 87401,
+    "duration": 104.4,
+    "blur": 1,
+    "cls": 0,
+    "nodes": 1136,
+    "ms": 1807.6,
+    "frames": 109,
+    "fps": 60.3,
+    "longGaps": 0,
+    "scrollH": 20196
+  }
+}

@@ -2,7 +2,7 @@
 import json, re, html as H
 from bible import verses
 CCI = "/workspace/cci"
-VER = "v1.0.0"; DATE = "2026-10-31"; ASSET_V = "20261031a"
+VER = "v2.0.0"; DATE = "2026-11-14"; ASSET_V = "20261114a"
 def strip(t): return re.sub(r'\^\d+', '', t)
 _c = json.load(open(f"{CCI}/creeds.json")); _h = json.load(open(f"{CCI}/heidelberg.json"))
 _b = json.load(open(f"{CCI}/belgic.json")); _d = json.load(open(f"{CCI}/dort.json"))
@@ -67,7 +67,13 @@ def md(s):
     s = re.sub(r'!!(.+?)!!', r'<span class="hard">\1</span>', s)
     s = re.sub(r'==(.+?)==', r'<span class="cov">\1</span>', s)
     s = re.sub(r'\[\[(.+?)\]\]', r'<span class="term">\1</span>', s)
+    s = re.sub(r'~~(.+?)~~', r'<span class="mem">\1</span>', s)
+    s = re.sub(r'\+\+(.+?)\+\+', r'<span class="app">\1</span>', s)
     return s
+
+def call(kind, title, text):
+    ic={"key":"💎","hard":"⚠️","mem":"🧠","conf":"📘","app":"🌱"}
+    return f'<div class="callout {kind}-c"><b>{ic.get(kind,"💡")} {title}</b><p>{md(text)}</p></div>'
 
 def verse_card(ref, cls=""):
     t = vtext(ref); assert t, ref
@@ -95,10 +101,13 @@ def page(fn, title, sub, body, hero_cls="", extra_head=""):
     idx = [h for h, _, _ in NAV].index(fn)
     prv = NAV[idx-1] if idx > 0 else None; nxt = NAV[idx+1] if idx < len(NAV)-1 else None
     pn = '<nav class="pn">' + (f'<a href="{prv[0]}">← {prv[1]} {prv[2]}</a>' if prv else '<span></span>') + (f'<a href="{nxt[0]}">{nxt[1]} {nxt[2]} →</a>' if nxt else '<span></span>') + '</nav>'
+    maps = 'class="livemap' in body
+    head = extra_head + (f'<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css?v={ASSET_V}">' if maps else '')
+    foot = f'<script src="assets/app.js?v={ASSET_V}" defer></script>' + (f'<script src="assets/maps.js?v={ASSET_V}" defer></script>' if maps else '')
     return f'''<!doctype html><html lang="zh-CN" data-theme="night"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{esc(title)} · 启示录深读 GROKstudy</title><meta name="description" content="{esc(sub)}">
 <script>try{{var t=localStorage.getItem('rv-theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('rv-toc')==='0')document.documentElement.classList.add('toc-off')}}catch(e){{}}</script>
-<link rel="stylesheet" href="assets/style.css?v={ASSET_V}">{extra_head}</head><body>
+<link rel="stylesheet" href="assets/style.css?v={ASSET_V}">{head}</head><body>
 <div class="bg" aria-hidden="true"><i></i><i></i><i></i></div><div id="prog"></div>
 <header class="top"><button id="tocbtn" class="ib" aria-label="目录" title="显示/隐藏目录 (T)">☰</button><a class="brand" href="index.html">🌅 启示录<b>深读</b></a>
 <nav class="mainnav">{nav}</nav><button id="navbtn" class="ib" aria-label="页面菜单">▦</button><button id="themebtn" class="ib" aria-label="切换主题" title="切换明暗">🌗</button></header>
@@ -106,12 +115,23 @@ def page(fn, title, sub, body, hero_cls="", extra_head=""):
 <aside id="toc" aria-label="本页目录"><div class="toc-h"><b>📑 本页目录</b><input id="tocq" type="search" placeholder="筛选目录…" aria-label="筛选目录"><button class="ib sm" id="tocx" aria-label="收起目录">✕</button></div>{toc_from(body)}</aside>
 <div id="scrim"></div>
 <main id="main"><section class="hero {hero_cls}"><div class="hero-in"><p class="eyebrow">启示录 · 欧陆改革宗深读 · {VER}</p><h1>{title}</h1><p class="sub">{sub}</p></div></section>
-<div class="legend glass"><span class="key">重点</span><span class="hard">难点</span><span class="cov">圣约神学</span><span class="term">术语</span><button type="button" class="vs" data-t="点按蓝色经文出处，可弹出和合本经文。">经文出处</button><span class="lg-cci">📘📗📕📒 CCI 逐字引文</span><span class="lg-cci">📙 威斯敏斯特</span></div>
+<div class="legend glass"><div class="markleg">
+<span class="key">重点（金色底纹）</span>
+<span class="hard">难点（波浪下划线）</span>
+<span class="cov">圣约（紫色实线）</span>
+<span class="term">术语（青色虚线）</span>
+<span class="mem">记忆钩（橙色波线）</span>
+<span class="app">应用（绿色实线）</span>
+<button type="button" class="vs" data-t="点按蓝色经文出处，可弹出和合本经文。">经文出处</button>
+<span class="lg-cci">📘📗📕📒 CCI 逐字引文</span>
+<span class="lg-cci">📙 威斯敏斯特</span>
+<span class="lg-cci">区块：💎重点 ⚠️难点 🧠记忆 📘信条 🌱应用</span>
+</div></div>
 {body}
 {pn}
 <footer class="foot glass"><p>启示录深读 · Revelation-{DATE.replace("-","")}-{VER}-GROKstudy · 信经与信条引文逐字取自 <a href="https://ccifellowship.org/books/book-of-praise" target="_blank" rel="noopener">ccifellowship.org《敬拜手册》</a>（构建时程序核对）；经文为和合本。讲解、图表与口诀为本站学习整理。</p></footer>
 </main><button id="totop" class="fab" aria-label="回到顶部">↑</button>
-<script src="assets/app.js?v={ASSET_V}" defer></script></body></html>'''
+{foot}</body></html>'''
 
 _W = json.load(open("/workspace/Westminster-Standards-GROKstudy/generator/data/standards.json"))
 def _ws(t): return re.sub(r'⟦\d+⟧', '', t)
